@@ -2,16 +2,17 @@ import streamlit as st
 import modal
 import json
 import os
+import uuid
 
-available_podcast_info = {}
 
-available_podcast_info = create_dict_from_json_files('.')
+
+
 
 def main():
     global available_podcast_info  # Declare available_podcast_info as global to modify it within main
     st.title("Newsletter Dashboard")
 
-    
+    available_podcast_info = create_dict_from_json_files('.')
 
     # Left section - Input fields
     st.sidebar.header("Podcast RSS Feeds")
@@ -72,9 +73,11 @@ def main():
 
         # Call the function to process the URLs and retrieve podcast guest information
         podcast_info = process_podcast_info(url)
-                # 2. Update the available_podcast_info Dictionary
-        podcast_name = podcast_info['podcast_details']['podcast_title']
-        available_podcast_info[podcast_name] = podcast_info
+        
+        filename = uuid.uuid4().hex
+
+        with open(f"{filename}.json", "w") as outfile:
+          json.dump(output, outfile)
 
         # 3. Refresh the Dropdown Options
         st.experimental_rerun()  # This will re-run the script, thus refreshing the dropdown options with the new data

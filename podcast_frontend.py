@@ -10,7 +10,7 @@ import uuid
 
 def main():
     global available_podcast_info  # Declare available_podcast_info as global to modify it within main
-    st.title("Newsletter Dashboard")
+    st.title("Pod Summary")
 
     available_podcast_info = create_dict_from_json_files('.')
 
@@ -26,7 +26,7 @@ def main():
         podcast_info = available_podcast_info[selected_podcast]
 
         # Right section - Newsletter content
-        st.header("Newsletter Content")
+        st.header("Details of Selected Podcast")
 
         # Display the podcast title
         st.subheader("Episode Title")
